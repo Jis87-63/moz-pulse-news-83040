@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { CookieConsent } from "@/components/CookieConsent";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { IntroScreen } from "@/components/IntroScreen";
 import { Header } from "@/components/Header";
@@ -11,25 +10,19 @@ import { toast } from "sonner";
 const Index = () => {
   const [showLoading, setShowLoading] = useState(false);
   const [showIntro, setShowIntro] = useState(false);
-  const [isReady, setIsReady] = useState(false);
   const [allNews, setAllNews] = useState<NewsArticle[]>([]);
   const [filteredNews, setFilteredNews] = useState<NewsArticle[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("Todas");
   const [isLoadingNews, setIsLoadingNews] = useState(true);
 
   useEffect(() => {
-    const cookieConsent = localStorage.getItem("cookieConsent");
     const hasSeenIntro = localStorage.getItem("hasSeenIntro");
     
-    if (cookieConsent === "accepted") {
-      if (!hasSeenIntro) {
-        setShowIntro(true);
-      } else {
-        setShowLoading(true);
-        fetchRSSNews();
-      }
+    if (!hasSeenIntro) {
+      setShowIntro(true);
     } else {
-      setIsReady(false);
+      setShowLoading(true);
+      fetchRSSNews();
     }
   }, []);
 
@@ -99,7 +92,6 @@ const Index = () => {
 
   const handleLoadingComplete = () => {
     setShowLoading(false);
-    setIsReady(true);
   };
 
   const handleSearch = (query: string) => {
@@ -125,10 +117,6 @@ const Index = () => {
 
   if (showLoading) {
     return <LoadingScreen onComplete={handleLoadingComplete} />;
-  }
-
-  if (!isReady) {
-    return <CookieConsent />;
   }
 
   return (

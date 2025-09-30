@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Newspaper, Search, Volume2, Clock, ArrowRight } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface IntroScreenProps {
   onComplete: () => void;
@@ -9,6 +10,7 @@ interface IntroScreenProps {
 
 export const IntroScreen = ({ onComplete }: IntroScreenProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [cookieConsent, setCookieConsent] = useState(false);
 
   const slides = [
     {
@@ -37,12 +39,15 @@ export const IntroScreen = ({ onComplete }: IntroScreenProps) => {
     if (currentSlide < slides.length - 1) {
       setCurrentSlide(currentSlide + 1);
     } else {
-      onComplete();
+      if (cookieConsent) {
+        localStorage.setItem("cookieConsent", "accepted");
+        onComplete();
+      }
     }
   };
 
   const handleSkip = () => {
-    onComplete();
+    setCurrentSlide(slides.length - 1);
   };
 
   return (
@@ -95,34 +100,64 @@ export const IntroScreen = ({ onComplete }: IntroScreenProps) => {
               onClick={handleNext}
               className="cosmic-gradient text-white hover:opacity-90 smooth-transition group"
               size="lg"
+              disabled={currentSlide === slides.length - 1 && !cookieConsent}
             >
               {currentSlide === slides.length - 1 ? "Começar" : "Próximo"}
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>
 
-          {/* Informações de contato */}
+          {/* Consentimento de cookies e Informações de contato */}
           {currentSlide === slides.length - 1 && (
-            <div className="pt-6 border-t border-border/40 text-center space-y-2">
-              <p className="text-sm text-muted-foreground">
-                Precisa de ajuda ou tem alguma sugestão?
-              </p>
-              <div className="flex items-center justify-center gap-4 text-sm">
-                <a
-                  href="mailto:Opais@muskdev.com"
-                  className="text-primary hover:underline"
-                >
-                  Opais@muskdev.com
-                </a>
-                <span className="text-muted-foreground">•</span>
-                <a
-                  href="https://www.facebook.com/profile.php?id=61579379653310"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
-                >
-                  Facebook
-                </a>
+            <div className="pt-6 border-t border-border/40 space-y-6">
+              {/* Consentimento de Cookies */}
+              <div className="space-y-4">
+                <div className="flex items-start gap-3 text-left">
+                  <Checkbox
+                    id="cookie-consent"
+                    checked={cookieConsent}
+                    onCheckedChange={(checked) => setCookieConsent(checked as boolean)}
+                    className="mt-1"
+                  />
+                  <label
+                    htmlFor="cookie-consent"
+                    className="text-sm text-muted-foreground leading-relaxed cursor-pointer"
+                  >
+                    🍪 Aceito o uso de cookies para melhorar minha experiência. Li e concordo com a{" "}
+                    <a href="/privacidade" className="text-primary hover:underline">
+                      Política de Privacidade
+                    </a>
+                    {" "}e os{" "}
+                    <a href="/termos" className="text-primary hover:underline">
+                      Termos de Uso
+                    </a>
+                    .
+                  </label>
+                </div>
+              </div>
+
+              {/* Informações de contato */}
+              <div className="text-center space-y-2">
+                <p className="text-sm text-muted-foreground">
+                  Precisa de ajuda ou tem alguma sugestão?
+                </p>
+                <div className="flex items-center justify-center gap-4 text-sm flex-wrap">
+                  <a
+                    href="mailto:Opais@muskdev.com"
+                    className="text-primary hover:underline"
+                  >
+                    Opais@muskdev.com
+                  </a>
+                  <span className="text-muted-foreground">•</span>
+                  <a
+                    href="https://www.facebook.com/profile.php?id=61579379653310"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    Facebook
+                  </a>
+                </div>
               </div>
             </div>
           )}
