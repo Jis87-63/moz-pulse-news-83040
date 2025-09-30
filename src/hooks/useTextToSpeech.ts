@@ -20,11 +20,24 @@ export const useTextToSpeech = () => {
 
     const utterance = new SpeechSynthesisUtterance(text);
     
-    // Configurações para português
+    // Configurações para português com voz masculina
     utterance.lang = 'pt-PT';
-    utterance.rate = 0.9;
-    utterance.pitch = 1;
+    utterance.rate = 0.9; // Velocidade de leitura
+    utterance.pitch = 0.8; // Tom mais grave para voz masculina
     utterance.volume = 1;
+
+    // Tentar selecionar uma voz masculina em português
+    const voices = window.speechSynthesis.getVoices();
+    const malePortugueseVoice = voices.find(voice => 
+      voice.lang.startsWith('pt') && voice.name.toLowerCase().includes('male')
+    );
+    const portugueseVoice = voices.find(voice => voice.lang.startsWith('pt'));
+    
+    if (malePortugueseVoice) {
+      utterance.voice = malePortugueseVoice;
+    } else if (portugueseVoice) {
+      utterance.voice = portugueseVoice;
+    }
 
     utterance.onstart = () => {
       setIsSpeaking(true);

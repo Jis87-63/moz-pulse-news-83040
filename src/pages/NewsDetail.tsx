@@ -188,12 +188,36 @@ const NewsDetail = () => {
             </div>
           </div>
 
+          {/* Google AdSense - Anúncio após metadados (Banner) */}
+          <div className="my-8 flex justify-center">
+            <div className="w-full max-w-3xl min-h-[100px] bg-muted/20 border-2 border-dashed border-muted-foreground/20 rounded-lg flex items-center justify-center">
+              <ins className="adsbygoogle"
+                   style={{ display: 'block' }}
+                   data-ad-client="ca-pub-2569329537599023"
+                   data-ad-slot="1111111111"
+                   data-ad-format="horizontal"
+                   data-full-width-responsive="true"></ins>
+            </div>
+          </div>
+
           <div className="relative overflow-hidden rounded-xl aspect-video">
             <img
               src={article.imageUrl}
               alt={article.title}
               className="w-full h-full object-cover"
             />
+          </div>
+
+          {/* Google AdSense - Anúncio após imagem principal (Retângulo) */}
+          <div className="my-8 flex justify-center">
+            <div className="w-full max-w-xl min-h-[280px] bg-muted/20 border-2 border-dashed border-muted-foreground/20 rounded-lg flex items-center justify-center">
+              <ins className="adsbygoogle"
+                   style={{ display: 'block' }}
+                   data-ad-client="ca-pub-2569329537599023"
+                   data-ad-slot="2222222222"
+                   data-ad-format="rectangle"
+                   data-full-width-responsive="true"></ins>
+            </div>
           </div>
 
           <div className="prose prose-invert prose-lg max-w-none">
@@ -227,6 +251,18 @@ const NewsDetail = () => {
               </audio>
             </div>
           )}
+
+          {/* Google AdSense - Anúncio antes do rodapé (Banner) */}
+          <div className="my-8 flex justify-center">
+            <div className="w-full max-w-3xl min-h-[100px] bg-muted/20 border-2 border-dashed border-muted-foreground/20 rounded-lg flex items-center justify-center">
+              <ins className="adsbygoogle"
+                   style={{ display: 'block' }}
+                   data-ad-client="ca-pub-2569329537599023"
+                   data-ad-slot="3333333333"
+                   data-ad-format="horizontal"
+                   data-full-width-responsive="true"></ins>
+            </div>
+          </div>
 
           <div className="pt-8 border-t border-border/50">
             <div className="flex items-center justify-between">

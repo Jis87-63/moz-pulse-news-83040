@@ -133,14 +133,16 @@ const Index = () => {
           </p>
         </section>
 
-        {/* Google AdSense - Anúncio Superior */}
+        {/* Google AdSense - Anúncio Superior (Banner Horizontal) */}
         <div className="my-8 flex justify-center">
-          <ins className="adsbygoogle"
-               style={{ display: 'block' }}
-               data-ad-client="ca-pub-2569329537599023"
-               data-ad-slot="1234567890"
-               data-ad-format="horizontal"
-               data-full-width-responsive="true"></ins>
+          <div className="w-full max-w-5xl min-h-[120px] bg-muted/20 border-2 border-dashed border-muted-foreground/20 rounded-lg flex items-center justify-center">
+            <ins className="adsbygoogle"
+                 style={{ display: 'block' }}
+                 data-ad-client="ca-pub-2569329537599023"
+                 data-ad-slot="1234567890"
+                 data-ad-format="horizontal"
+                 data-full-width-responsive="true"></ins>
+          </div>
         </div>
 
         <section className="space-y-8">
@@ -180,14 +182,16 @@ const Index = () => {
           )}
         </section>
 
-        {/* Google AdSense - Anúncio Inferior */}
-        <div className="my-8 flex justify-center">
-          <ins className="adsbygoogle"
-               style={{ display: 'block' }}
-               data-ad-client="ca-pub-2569329537599023"
-               data-ad-slot="0987654321"
-               data-ad-format="horizontal"
-               data-full-width-responsive="true"></ins>
+        {/* Google AdSense - Anúncio Inferior (Banner Horizontal) */}
+        <div className="my-12 flex justify-center">
+          <div className="w-full max-w-5xl min-h-[120px] bg-muted/20 border-2 border-dashed border-muted-foreground/20 rounded-lg flex items-center justify-center">
+            <ins className="adsbygoogle"
+                 style={{ display: 'block' }}
+                 data-ad-client="ca-pub-2569329537599023"
+                 data-ad-slot="0987654321"
+                 data-ad-format="horizontal"
+                 data-full-width-responsive="true"></ins>
+          </div>
         </div>
       </main>
 
